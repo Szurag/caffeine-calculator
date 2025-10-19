@@ -22,6 +22,7 @@ def add_intake(request):
     return render(request, "intake/add_intake.html", {"form": form})
 
 
+@login_required(login_url='login')
 def delete_intake(request, intake_id):
     try:
         intake = Intake.objects.get(id=intake_id, user=request.user)
