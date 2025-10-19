@@ -3,6 +3,18 @@
 {% block content %}
     <h1>Twoje produkty</h1>
 
+    {% include 'dashboard_navigation.html' %}
+
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <table border="1">
         <thead>
         <tr>
@@ -20,7 +32,7 @@
                 <td>{{ product.caffeine_mg }} mg</td>
                 <td>
 {#                    <a href="{% url 'edit_product' product.id %}">Edytuj</a> |#}
-{#                    <a href="{% url 'delete_product' product.id %}">Usuń</a>#}
+                    <a href="{% url 'product_delete' product.id %}">Usuń</a>
                 </td>
             </tr>
         {% empty %}

@@ -1,0 +1,12 @@
+<ul>
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="#">Spożycie</a></li>
+    <li>
+        <a href="{% url 'product_index' %}">Twoje produkty</a>
+        {% if request.resolver_match.url_name == 'product_index' or request.resolver_match.url_name == 'product_add' or request.resolver_match.url_name == 'product_detail' %}
+            <ul>
+                <li><a href="{% url 'product_add' %}">Dodaj produkt</a></li>
+            </ul>
+        {% endif %}
+    </li>
+</ul>
