@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}Dodaj spożycie - Caffeine Calculator{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Dodaj spożycie kofeiny</h1>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" class="intake-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="product-search">Wyszukaj produkt:</label>
+            <input type="text" id="product-search" class="form-control" placeholder="Wpisz nazwę produktu...">
+        </div>
+
+        <div class="form-group">
+            {{ form.product.label_tag }}
+            {{ form.product }}
+            {% if form.product.errors %}
+                <div class="error">{{ form.product.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.quantity.label_tag }}
+            {{ form.quantity }}
+            {% if form.quantity.errors %}
+                <div class="error">{{ form.quantity.errors }}</div>
+            {% endif %}
+            <small class="form-text">Wprowadź liczbę całkowitą (1, 2, 3, 4...)</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Dodaj spożycie</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Anuluj</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 0.25rem;
+        color: #666;
+    }
+
+    .error {
+        color: #dc3545;
+        margin-top: 0.25rem;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #545b62;
+    }
+
+    .alert {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+</style>
+
+<script>
+    // Filtrowanie produktów w select
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('product-search');
+        const productSelect = document.getElementById('product-select');
+        const originalOptions = Array.from(productSelect.options);
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            // Usuń wszystkie opcje oprócz pierwszej (placeholder)
+            while (productSelect.options.length > 1) {
+                productSelect.remove(1);
+            }
+
+            // Dodaj pasujące opcje
+            originalOptions.forEach(option => {
+                if (option.value === '') {
+                    return; // Pomiń placeholder
+                }
+
+                if (option.text.toLowerCase().includes(searchTerm)) {
+                    productSelect.add(option.cloneNode(true));
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

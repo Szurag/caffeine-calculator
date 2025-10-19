@@ -22,7 +22,9 @@ from caffeine_calculator import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('users.urls'))
+    path('', include('users.urls')),
+    path('intake/', include('intake.urls')),
+    path('products/', include('products.urls')),
 ]
 
 if settings.DEBUG:

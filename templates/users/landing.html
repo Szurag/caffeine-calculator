@@ -1,85 +1,94 @@
-<!DOCTYPE html>
-<html>
-<head><title>Welcome</title></head>
-<body>
-<h1>☕ Welcome to Caffeine Calculator</h1>
-<p>Track your daily caffeine intake easily.</p>
+{% extends 'base.html' %}
 
-<h1>Our products:</h1>
-<table border="1" width="1000">
-    <th>
-        Product name
-    </th>
-    <th>Caffeine amount in all product</th>
-    <th>Image</th>
-    {% for product in products_all %}
-        <tr>
-            <td>
-                {{ product.name }}
-            </td>
-            <td>
-                {{ product.caffeine_mg }} mg
-            </td>
-            <td>
-                {{ product.image_tag }}
-            </td>
-        </tr>
-    {% endfor %}
-</table>
+{% block content %}
+    <h1>☕ Welcome to Caffeine Calculator</h1>
 
-<h2>Products with caffeine greater than or equals 160mg</h2>
+    <a href="{% url 'login' %}">Login</a> |
+    <a href="{% url 'register' %}">Register</a>
+{% endblock %}
 
-<table border="1" width="1000">
-    <th>
-        Product name
-    </th>
-    <th>Caffeine amount in all product</th>
-    <th>Image</th>
-    {% for product in products_with_high_caffeine %}
-        <tr>
-            <td>
-                {{ product.name }}
-            </td>
-            <td>
-                {{ product.caffeine_mg }} mg
-            </td>
-            <td>
-                {{ product.image_tag }}
-            </td>
-        </tr>
-    {% endfor %}
-</table>
 
-<h2>Search your own product</h2>
-<form method="get">
-    <input type="text" name="search">
-    <input type="submit">
-</form>
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head><title>Welcome</title></head>#}
+{#<body>#}
+{#<h1>☕ Welcome to Caffeine Calculator</h1>#}
+{#<p>Track your daily caffein§§e intake easily.</p>#}
+{##}
+{#<h1>Our products:</h1>#}
+{#<table border="1" width="1000">#}
+{#    <th>#}
+{#        Product name#}
+{#    </th>#}
+{#    <th>Caffeine amount in all product</th>#}
+{#    <th>Image</th>#}
+{#    {% for product in products_all %}#}
+{#        <tr>#}
+{#            <td>#}
+{#                {{ product.name }}#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.caffeine_mg }} mg#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.image_tag }}#}
+{#            </td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{##}
+{#<h2>Products with caffeine greater than or equals 160mg</h2>#}
+{##}
+{#<table border="1" width="1000">#}
+{#    <th>#}
+{#        Product name#}
+{#    </th>#}
+{#    <th>Caffeine amount in all product</th>#}
+{#    <th>Image</th>#}
+{#    {% for product in products_with_high_caffeine %}#}
+{#        <tr>#}
+{#            <td>#}
+{#                {{ product.name }}#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.caffeine_mg }} mg#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.image_tag }}#}
+{#            </td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{##}
+{#<h2>Search your own product</h2>#}
+{#<form method="get">#}
+{#    <input type="text" name="search">#}
+{#    <input type="submit">#}
+{#</form>#}
+{##}
+{#{% if searched_products != None %}#}
+{#	<table border="1" width="1000">#}
+{#    <th>#}
+{#        Product name#}
+{#    </th>#}
+{#    <th>Caffeine amount in all product</th>#}
+{#    <th>Image</th>#}
+{#    {% for product in searched_products %}#}
+{#        <tr>#}
+{#            <td>#}
+{#                {{ product.name }}#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.caffeine_mg }} mg#}
+{#            </td>#}
+{#            <td>#}
+{#                {{ product.image_tag }}#}
+{#            </td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{#{% endif %}#}
+{##}
 
-{% if searched_products != None %}
-	<table border="1" width="1000">
-    <th>
-        Product name
-    </th>
-    <th>Caffeine amount in all product</th>
-    <th>Image</th>
-    {% for product in searched_products %}
-        <tr>
-            <td>
-                {{ product.name }}
-            </td>
-            <td>
-                {{ product.caffeine_mg }} mg
-            </td>
-            <td>
-                {{ product.image_tag }}
-            </td>
-        </tr>
-    {% endfor %}
-</table>
-{% endif %}
-
-<a href="{% url 'login' %}">Login</a> |
-<a href="{% url 'register' %}">Register</a>
-</body>
-</html>
+{#</body>#}
+{#</html>#}
