@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Dodaj produkt - Caffeine Calculator{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Dodaj nowy produkt</h1>
+
+    {% include 'dashboard_navigation.html' %}
+
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <table border="1">
+            <tr>
+                <td>{{ form.name.label_tag }}</td>
+                <td>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <br><span>{{ form.name.errors }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>{{ form.caffeine_mg.label_tag }}</td>
+                <td>
+                    {{ form.caffeine_mg }}
+                    <br><small>Podaj ilość kofeiny w miligramach (mg)</small>
+                    {% if form.caffeine_mg.errors %}
+                        <br><span>{{ form.caffeine_mg.errors }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td>{{ form.photo.label_tag }}</td>
+                <td>
+                    {{ form.photo }}
+                    <br><small>Możesz dodać zdjęcie produktu (opcjonalne)</small>
+                    {% if form.photo.errors %}
+                        <br><span>{{ form.photo.errors }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">Dodaj produkt</button>
+                    <a href="{% url 'product_index' %}">Anuluj</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

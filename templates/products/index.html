@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Twoje produkty</h1>
+
+    {% include 'dashboard_navigation.html' %}
+
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Obrazek</th>
+            <th>Nazwa produktu</th>
+            <th>Zawartość kofeiny (mg)</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.image_tag }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.caffeine_mg }} mg</td>
+                <td>
+{#                    <a href="{% url 'edit_product' product.id %}">Edytuj</a> |#}
+                    <a href="{% url 'product_delete' product.id %}">Usuń</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3">Brak produktów do wyświetlenia.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
